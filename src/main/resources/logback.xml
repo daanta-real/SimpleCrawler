@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%green(%d{yyyy-MM-dd HH:mm:ss.SSS}) %red(%thread) %green(%X{traceId}) %yellow(%logger) %boldBlue(%5level)] %white(%msg)\n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <springProfile name="!(dev | prd)">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+
+
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <logger name="jdbc" level="OFF"/>
+
+    <logger name="jdbc.sqlonly" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="jdbc.resultsettable" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
